@@ -27,7 +27,7 @@ export const aboutData: AboutData = {
   imageAlt: " Character Illustration",
   text: `I am a first-year PhD student at EECS Department at University of Michigan, Ann Arbor, working with Professor Ke Sun at AmI lab.
 
-My research focuses on developing novel sensing systems to solve real-world problems, which rely on phsics and engineering principles.`,
+My research focuses on developing novel sensing systems to solve real-world problems, which rely on physical and engineering principles.`,
   socialLinks: {
     linkedin: "https://www.linkedin.com/in/linzhen-zhu/CleanShot 2026-03-22 at 19.57.39@2x.pngpic.png",
     googleScholar: "https://scholar.google.com/citations?user=P_CEc8oAAAAJ&hl=en",
