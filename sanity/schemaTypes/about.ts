@@ -27,6 +27,28 @@ export const about = defineType({
       description: 'Bio / about paragraph',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'socialLinks',
+      title: 'Profile links',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'linkedin',
+          title: 'LinkedIn',
+          type: 'url',
+        }),
+        defineField({
+          name: 'googleScholar',
+          title: 'Google Scholar',
+          type: 'url',
+        }),
+        defineField({
+          name: 'github',
+          title: 'GitHub',
+          type: 'url',
+        }),
+      ],
+    }),
   ],
   preview: {
     select: { media: 'image' },

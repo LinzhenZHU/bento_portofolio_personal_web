@@ -10,10 +10,18 @@ export type SkillsData = {
   highlights: string[];
 };
 
+export type AboutSocialLinks = {
+  linkedin?: string;
+  googleScholar?: string;
+  github?: string;
+};
+
 export type AboutData = {
   image: string;
   imageAlt: string;
   text: string;
+  /** Optional profile URLs; omit or leave empty to hide an icon */
+  socialLinks?: AboutSocialLinks;
 };
 
 export type ContactEntry = {
@@ -29,7 +37,12 @@ export type Project = {
   href?: string;
 };
 
+/** Tabs in the Work panel; each project group is tagged with one */
+export type WorkTabId = "publication" | "honorAward" | "service";
+
 export type ProjectCategory = {
+  /** Defaults to `publication` when omitted (e.g. legacy Sanity docs) */
+  workTab?: WorkTabId;
   category: string;
   projects: Project[];
 };

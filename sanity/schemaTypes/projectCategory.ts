@@ -6,6 +6,22 @@ export const projectCategory = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'workTab',
+      title: 'Work tab',
+      type: 'string',
+      description: 'Which top tab this group appears under',
+      options: {
+        list: [
+          { title: 'Publication', value: 'publication' },
+          { title: 'Honor & Award', value: 'honorAward' },
+          { title: 'Service', value: 'service' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'publication',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'category',
       title: 'Category Name',
       type: 'string',

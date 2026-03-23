@@ -20,7 +20,7 @@
 
 .highlighted {
   font-weight: bold;
-  color: brown;
+  color: var(--skill-highlight);
 }
 
 .falling-text-canvas {

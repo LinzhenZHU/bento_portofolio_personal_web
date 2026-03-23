@@ -1,4 +1,4 @@
-import type { SiteData } from "@/data/types";
+import type { ProjectCategory, SiteData } from "@/data/types";
 import {
   heroData,
   skillsData,
@@ -47,6 +47,11 @@ export async function getSiteData(): Promise<SiteData> {
     skills: skills ?? skillsData,
     about: about ?? aboutData,
     contact: contact?.entries ?? contactData,
-    projectCategories: categories?.length ? categories : projectCategories,
+    projectCategories: categories?.length
+      ? (categories as ProjectCategory[]).map((c) => ({
+          ...c,
+          workTab: c.workTab ?? "publication",
+        }))
+      : projectCategories,
   };
 }

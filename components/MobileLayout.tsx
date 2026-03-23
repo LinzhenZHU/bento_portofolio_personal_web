@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import type { SiteData } from "@/data/types";
+import type { SiteData, WorkTabId } from "@/data/types";
 import {
   HeroSection,
   SkillsSection,
@@ -12,17 +12,22 @@ import {
   getClipFrom,
 } from "./sections";
 import ExpandedOverlay from "./sections/ui/ExpandedOverlay";
+import { FullscreenExpandIcon } from "./sections/ui/FullscreenExpandIcon";
 
 type MobileLayoutProps = {
   siteData: SiteData;
   expandedSection: "work" | "about" | null;
   setExpandedSection: (section: "work" | "about" | null) => void;
+  workActiveTab: WorkTabId;
+  setWorkActiveTab: (tab: WorkTabId) => void;
 };
 
 export default function MobileLayout({
   siteData,
   expandedSection,
   setExpandedSection,
+  workActiveTab,
+  setWorkActiveTab,
 }: MobileLayoutProps) {
   const [sourceRect, setSourceRect] = useState<DOMRect | null>(null);
 
@@ -75,14 +80,17 @@ export default function MobileLayout({
         {/* Work Section */}
         <div
           ref={workRef}
-          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-black bg-white px-6 transition-colors duration-200 hover:bg-gray-50"
+          className="flex items-center justify-between overflow-hidden border-b border-black bg-white px-6 py-2"
         >
-          <SectionHeading_Clickable onClick={handleWorkExpand}>
-            Work
-          </SectionHeading_Clickable>
-          <div onClick={handleWorkExpand} className="text-xl">
-            +
-          </div>
+          <h3 className="heading-section-sm">Work</h3>
+          <button
+            type="button"
+            onClick={handleWorkExpand}
+            className="text-black transition-opacity hover:opacity-70"
+            aria-label="Expand work section"
+          >
+            <FullscreenExpandIcon className="h-5 w-5" />
+          </button>
         </div>
 
         {/* About Section */}
@@ -100,7 +108,10 @@ export default function MobileLayout({
 
         {/* Contact Section */}
         <div className="overflow-hidden bg-white px-6 py-6">
-          <ContactSection data={siteData.contact} />
+          <ContactSection
+            data={siteData.contact}
+            socialLinks={siteData.about.socialLinks}
+          />
         </div>
       </div>
 
@@ -112,6 +123,8 @@ export default function MobileLayout({
       >
         <WorkSection
           data={siteData.projectCategories}
+          activeTab={workActiveTab}
+          onActiveTabChange={setWorkActiveTab}
           onExpand={handleWorkExpand}
           isExpanded={true}
         />

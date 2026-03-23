@@ -4,6 +4,20 @@ import { useRef, useState, useEffect } from "react";
 import Matter from "matter-js";
 import "./FallingText.css";
 
+/** Strip common leading/trailing punctuation so "chatgpt," matches highlight "chatgpt" */
+function normalizeToken(w) {
+  return w.replace(/^[\s,;:.!?]+|[\s,;:.!?]+$/g, "").toLowerCase();
+}
+
+function tokenMatchesHighlight(word, highlightWords) {
+  const t = normalizeToken(word);
+  if (!t) return false;
+  return highlightWords.some((hw) => {
+    const h = normalizeToken(hw);
+    return h.length > 0 && (t.startsWith(h) || t === h);
+  });
+}
+
 const FallingText = ({
   className = "",
   text = "",
@@ -24,10 +38,10 @@ const FallingText = ({
 
   useEffect(() => {
     if (!textRef.current) return;
-    const words = text.split(" ");
+    const words = text.split(/\s+/).filter(Boolean);
     const newHTML = words
       .map((word) => {
-        const isHighlighted = highlightWords.some((hw) => word.startsWith(hw));
+        const isHighlighted = tokenMatchesHighlight(word, highlightWords);
         return `<span class="word ${isHighlighted ? highlightClass : ""}">${word}</span>`;
       })
       .join(" ");

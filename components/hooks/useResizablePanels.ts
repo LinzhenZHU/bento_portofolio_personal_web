@@ -27,27 +27,38 @@ const CONSTRAINTS = {
 
 const LERP_FACTOR = 0.15;
 
-const DEFAULT_SIZES: PanelSizes = {
+export const DEFAULT_PANEL_SIZES: PanelSizes = {
   topHeight: 25,
   topLeftWidth: 55,
   bottomLeftWidth: 40,
-  bottomRightTopHeight: 60,
+  bottomRightTopHeight: 75,
+};
+
+type UseResizablePanelsOptions = {
+  /** When false, panel ratios stay fixed at defaults and dividers do not drag */
+  enabled?: boolean;
 };
 
 export function useResizablePanels(
   containerRef: RefObject<HTMLDivElement | null>,
+  options: UseResizablePanelsOptions = {},
 ) {
-  const [sizes, setSizes] = useState<PanelSizes>(DEFAULT_SIZES);
-  const targetSizes = useRef<PanelSizes>({ ...DEFAULT_SIZES });
+  const { enabled = true } = options;
+  const [sizes, setSizes] = useState<PanelSizes>(DEFAULT_PANEL_SIZES);
+  const targetSizes = useRef<PanelSizes>({ ...DEFAULT_PANEL_SIZES });
   const rafId = useRef<number | null>(null);
   const [isDragging, setIsDragging] = useState<DividerType>(null);
 
-  const handleMouseDown = useCallback((divider: NonNullable<DividerType>) => {
-    return (e: React.MouseEvent) => {
-      e.preventDefault();
-      setIsDragging(divider);
-    };
-  }, []);
+  const handleMouseDown = useCallback(
+    (divider: NonNullable<DividerType>) => {
+      return (e: React.MouseEvent) => {
+        if (!enabled) return;
+        e.preventDefault();
+        setIsDragging(divider);
+      };
+    },
+    [enabled],
+  );
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -164,5 +175,6 @@ export function useResizablePanels(
     sizes,
     isDragging,
     handleMouseDown,
+    resizeEnabled: enabled,
   };
 }

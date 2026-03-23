@@ -12,7 +12,12 @@ export const aboutQuery = defineQuery(
   `*[_type == "about" && _id == "about"][0]{
     "image": image.asset->url,
     imageAlt,
-    text
+    text,
+    socialLinks{
+      linkedin,
+      googleScholar,
+      github
+    }
   }`,
 )
 
@@ -24,6 +29,7 @@ export const contactQuery = defineQuery(
 
 export const projectCategoriesQuery = defineQuery(
   `*[_type == "projectCategory"] | order(order asc) {
+    workTab,
     category,
     projects[]{
       title,

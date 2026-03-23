@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { SiteData } from "@/data/types";
+import type { SiteData, WorkTabId } from "@/data/types";
 import MobileLayout from "../components/MobileLayout";
 import LaptopLayout from "../components/LaptopLayout";
 
@@ -9,6 +9,7 @@ type ExpandedSection = "work" | "about" | null;
 
 export default function ClientPage({ siteData }: { siteData: SiteData }) {
   const [expandedSection, setExpandedSection] = useState<ExpandedSection>(null);
+  const [workActiveTab, setWorkActiveTab] = useState<WorkTabId>("publication");
 
   return (
     <div className="min-h-screen bg-white text-black">
@@ -18,6 +19,8 @@ export default function ClientPage({ siteData }: { siteData: SiteData }) {
           siteData={siteData}
           expandedSection={expandedSection}
           setExpandedSection={setExpandedSection}
+          workActiveTab={workActiveTab}
+          setWorkActiveTab={setWorkActiveTab}
         />
       </div>
 
@@ -27,6 +30,8 @@ export default function ClientPage({ siteData }: { siteData: SiteData }) {
           siteData={siteData}
           expandedSection={expandedSection}
           setExpandedSection={setExpandedSection}
+          workActiveTab={workActiveTab}
+          setWorkActiveTab={setWorkActiveTab}
         />
       </div>
     </div>

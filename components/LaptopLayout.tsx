@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useRef } from "react";
-import type { SiteData } from "@/data/types";
+import type { SiteData, WorkTabId } from "@/data/types";
 import {
   HeroSection,
   SkillsSection,
@@ -17,12 +17,16 @@ type ResizableLayoutProps = {
   siteData: SiteData;
   expandedSection: "work" | "about" | null;
   setExpandedSection: (section: "work" | "about" | null) => void;
+  workActiveTab: WorkTabId;
+  setWorkActiveTab: (tab: WorkTabId) => void;
 };
 
 export default function ResizableLayout({
   siteData,
   expandedSection,
   setExpandedSection,
+  workActiveTab,
+  setWorkActiveTab,
 }: ResizableLayoutProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [sourceRect, setSourceRect] = useState<DOMRect | null>(null);
@@ -54,8 +58,8 @@ export default function ResizableLayout({
   const clipFrom = getClipFrom(sourceRect);
 
   // Use custom hooks for animation logic
-  const { sizes, isDragging, handleMouseDown } =
-    useResizablePanels(containerRef);
+  const { sizes, isDragging, handleMouseDown, resizeEnabled } =
+    useResizablePanels(containerRef, { enabled: false });
 
   // Animation refs for lines
   const mainHLineRef = useRef<HTMLDivElement>(null);
@@ -111,15 +115,21 @@ export default function ResizableLayout({
 
         {/* Vertical Divider (Top Section) */}
         <div
-          className="group relative z-10 flex h-full w-0 cursor-col-resize items-center justify-center"
-          onMouseDown={handleMouseDown("vertical-top")}
+          className={`relative z-10 flex h-full w-0 items-center justify-center ${
+            resizeEnabled ? "group cursor-col-resize" : "pointer-events-none"
+          }`}
+          onMouseDown={
+            resizeEnabled ? handleMouseDown("vertical-top") : undefined
+          }
         >
           <div
             ref={topVLineRef}
-            className={`absolute h-full w-px origin-top bg-black ${
-              isDragging === "vertical-top"
-                ? "w-1 bg-gray-400"
-                : "group-hover:w-1 group-hover:bg-gray-400"
+            className={`absolute h-full origin-top bg-black ${
+              resizeEnabled
+                ? isDragging === "vertical-top"
+                  ? "w-1 bg-gray-400"
+                  : "w-px group-hover:w-1 group-hover:bg-gray-400"
+                : "w-px"
             }`}
           />
         </div>
@@ -137,16 +147,22 @@ export default function ResizableLayout({
 
       {/* Horizontal Divider (Main - between Top and Bottom) */}
       <div
-        className="group absolute left-0 right-0 z-10 flex h-0 cursor-row-resize items-center justify-center"
+        className={`absolute left-0 right-0 z-10 flex h-0 items-center justify-center ${
+          resizeEnabled ? "group cursor-row-resize" : "pointer-events-none"
+        }`}
         style={{ top: `${sizes.topHeight}%` }}
-        onMouseDown={handleMouseDown("horizontal-main")}
+        onMouseDown={
+          resizeEnabled ? handleMouseDown("horizontal-main") : undefined
+        }
       >
         <div
           ref={mainHLineRef}
-          className={`absolute h-px w-full origin-left bg-black ${
-            isDragging === "horizontal-main"
-              ? "h-1 bg-gray-400"
-              : "group-hover:h-1 group-hover:bg-gray-400"
+          className={`absolute w-full origin-left bg-black ${
+            resizeEnabled
+              ? isDragging === "horizontal-main"
+                ? "h-1 bg-gray-400"
+                : "h-px group-hover:h-1 group-hover:bg-gray-400"
+              : "h-px"
           }`}
         />
       </div>
@@ -165,6 +181,8 @@ export default function ResizableLayout({
           <div ref={workContentRef} className="h-full p-4">
             <WorkSection
               data={siteData.projectCategories}
+              activeTab={workActiveTab}
+              onActiveTabChange={setWorkActiveTab}
               onExpand={handleWorkExpand}
             />
           </div>
@@ -172,15 +190,21 @@ export default function ResizableLayout({
 
         {/* Vertical Divider (Bottom Section) */}
         <div
-          className="group relative z-10 flex h-full w-0 cursor-col-resize items-center justify-center"
-          onMouseDown={handleMouseDown("vertical-bottom")}
+          className={`relative z-10 flex h-full w-0 items-center justify-center ${
+            resizeEnabled ? "group cursor-col-resize" : "pointer-events-none"
+          }`}
+          onMouseDown={
+            resizeEnabled ? handleMouseDown("vertical-bottom") : undefined
+          }
         >
           <div
             ref={bottomVLineRef}
-            className={`absolute h-full w-px origin-top bg-black ${
-              isDragging === "vertical-bottom"
-                ? "w-1 bg-gray-400"
-                : "group-hover:w-1 group-hover:bg-gray-400"
+            className={`absolute h-full origin-top bg-black ${
+              resizeEnabled
+                ? isDragging === "vertical-bottom"
+                  ? "w-1 bg-gray-400"
+                  : "w-px group-hover:w-1 group-hover:bg-gray-400"
+                : "w-px"
             }`}
           />
         </div>
@@ -206,16 +230,24 @@ export default function ResizableLayout({
 
           {/* Horizontal Divider (About/Contact) */}
           <div
-            className="group absolute left-0 right-0 z-10 flex h-0 cursor-row-resize items-center justify-center"
+            className={`absolute left-0 right-0 z-10 flex h-0 items-center justify-center ${
+              resizeEnabled ? "group cursor-row-resize" : "pointer-events-none"
+            }`}
             style={{ top: `${sizes.bottomRightTopHeight}%` }}
-            onMouseDown={handleMouseDown("horizontal-bottom-right")}
+            onMouseDown={
+              resizeEnabled
+                ? handleMouseDown("horizontal-bottom-right")
+                : undefined
+            }
           >
             <div
               ref={bottomRightHLineRef}
-              className={`absolute h-px w-full origin-left bg-black ${
-                isDragging === "horizontal-bottom-right"
-                  ? "h-1 bg-gray-400"
-                  : "group-hover:h-1 group-hover:bg-gray-400"
+              className={`absolute w-full origin-left bg-black ${
+                resizeEnabled
+                  ? isDragging === "horizontal-bottom-right"
+                    ? "h-1 bg-gray-400"
+                    : "h-px group-hover:h-1 group-hover:bg-gray-400"
+                  : "h-px"
               }`}
             />
           </div>
@@ -226,7 +258,10 @@ export default function ResizableLayout({
             style={{ height: `${100 - sizes.bottomRightTopHeight}%` }}
           >
             <div ref={contactContentRef} className="h-full p-4">
-              <ContactSection data={siteData.contact} />
+              <ContactSection
+                data={siteData.contact}
+                socialLinks={siteData.about.socialLinks}
+              />
             </div>
           </div>
         </div>
@@ -241,6 +276,8 @@ export default function ResizableLayout({
       >
         <WorkSection
           data={siteData.projectCategories}
+          activeTab={workActiveTab}
+          onActiveTabChange={setWorkActiveTab}
           onExpand={handleWorkExpand}
           isExpanded={true}
         />
