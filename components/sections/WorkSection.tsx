@@ -48,7 +48,7 @@ export function WorkSection({
 
   return (
     <div className="relative h-full">
-      <div className="mb-2 flex items-end justify-between gap-2 border-b border-black/15 pb-2">
+      <div className="mb-2 flex items-end justify-between gap-2 border-b border-border pb-2">
         <nav
           className="flex min-w-0 flex-1 flex-wrap justify-start gap-x-3 gap-y-1 sm:gap-x-5"
           aria-label="Work sections"
@@ -60,12 +60,12 @@ export function WorkSection({
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`group relative inline-block cursor-pointer overflow-hidden py-1 transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
+                className={`group relative inline-block cursor-pointer overflow-hidden py-1 transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
                   isActive ? "scale-105" : "hover:scale-105"
                 }`}
               >
                 <span
-                  className={`absolute inset-0 origin-left bg-black transition-transform duration-300 ease-out ${
+                  className={`absolute inset-0 origin-left bg-foreground transition-transform duration-300 ease-out ${
                     isActive
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -75,8 +75,8 @@ export function WorkSection({
                 <span
                   className={`relative z-10 text-left text-sm font-bold leading-snug transition-colors duration-300 sm:text-base ${
                     isActive
-                      ? "text-white"
-                      : "text-gray-600 group-hover:text-white"
+                      ? "text-background"
+                      : "text-muted-foreground group-hover:text-background"
                   }`}
                 >
                   {tab.label}
@@ -89,7 +89,7 @@ export function WorkSection({
           <button
             type="button"
             onClick={onExpand}
-            className="mb-0.5 shrink-0 text-black transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            className="mb-0.5 shrink-0 text-foreground transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             aria-label="Expand to fullscreen"
           >
             <FullscreenExpandIcon className="h-5 w-5 sm:h-6 sm:w-6" />

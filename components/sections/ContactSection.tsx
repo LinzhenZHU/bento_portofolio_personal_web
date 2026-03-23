@@ -37,10 +37,10 @@ export function ContactSection({ data, socialLinks }: ContactSectionProps) {
           <a
             key={entry.value}
             href={entry.href}
-            className="group flex items-center gap-2.5 text-gray-600 transition-colors hover:text-black"
+            className="group flex items-center gap-2.5 text-muted-foreground transition-colors hover:text-foreground"
           >
             {isEmailEntry(entry) ? (
-              <MailIcon className="h-5 w-5 shrink-0 text-gray-600 transition-colors group-hover:text-black" />
+              <MailIcon className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
             ) : null}
             <span>{entry.value}</span>
           </a>

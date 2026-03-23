@@ -50,6 +50,9 @@
 }
 
 :root {
+  /* ThemeCloudDrift: set by InterestsHeading (Skills); fallbacks before measure */
+  --theme-cloud-left: 0px;
+  --theme-cloud-travel: 100vw;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -163,10 +166,65 @@
 
   /* Meta / caption text — tech tags, subtitles */
   .text-meta {
-    @apply text-sm text-gray-500;
+    @apply text-sm text-muted-foreground;
   }
 
   .highlighted-primary {
     @apply text-primary font-semibold;
+  }
+}
+
+/* Theme: clouds from Interests right edge → off-screen right; long fade-in, then fade out near icon */
+@layer utilities {
+  @keyframes theme-cloud-cross {
+    from {
+      transform: translate(-100%, -50%);
+      opacity: 0;
+    }
+    /* 淡入拉长：全透明 → 可见 */
+    10% {
+      opacity: 0.15;
+    }
+    22% {
+      opacity: 0.4;
+    }
+    34% {
+      opacity: 0.72;
+    }
+    44% {
+      opacity: 1;
+    }
+    /* 保持片刻全显后再靠右淡出 */
+    50% {
+      opacity: 1;
+    }
+    58% {
+      opacity: 0.55;
+    }
+    70% {
+      opacity: 0.18;
+    }
+    82% {
+      opacity: 0;
+    }
+    to {
+      transform: translate(calc(-100% + var(--theme-cloud-travel, 100vw)), -50%);
+      opacity: 0;
+    }
+  }
+  .animate-theme-cloud-cross {
+    animation: theme-cloud-cross 22s linear infinite;
+  }
+
+  @keyframes theme-road-lane {
+    from {
+      background-position-x: -16px;
+    }
+    to {
+      background-position-x: 16px;
+    }
+  }
+  .animate-theme-road-lane {
+    animation: theme-road-lane 0.55s linear infinite;
   }
 }

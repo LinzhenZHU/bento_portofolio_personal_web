@@ -34,9 +34,9 @@ export function ProjectCard({
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-0 w-full flex items-center justify-between px-4 py-1 bg-white/80">
+      <div className="absolute bottom-0 flex w-full items-center justify-between bg-background/80 px-4 py-1 backdrop-blur-sm">
         {/* Title */}
-        <h4 className="heading-card text-black">{title}</h4>
+        <h4 className="heading-card text-foreground">{title}</h4>
 
         {/* Tech Stack */}
         <div className="flex items-center gap-3">

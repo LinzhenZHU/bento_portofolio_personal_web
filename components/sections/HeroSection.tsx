@@ -7,7 +7,7 @@ type HeroSectionProps = {
 
 export function HeroSection({ data }: HeroSectionProps) {
   return (
-    <div className="flex h-full flex-col justify-center">
+    <div className="flex h-full min-h-0 flex-col justify-center">
       <h1 className="heading-display">{data.greeting}</h1>
       <RotatingText
         texts={data.titles}

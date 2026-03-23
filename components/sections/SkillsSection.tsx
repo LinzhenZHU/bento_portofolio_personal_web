@@ -1,5 +1,6 @@
 import type { SkillsData } from "@/data/types";
 import FallingText from "@/components/ReactBits/FallingText";
+import { InterestsHeading } from "./InterestsHeading";
 
 type SkillsSectionProps = {
   data: SkillsData;
@@ -7,8 +8,8 @@ type SkillsSectionProps = {
 
 export function SkillsSection({ data }: SkillsSectionProps) {
   return (
-    <div className="overflow-hidden flex h-full flex-col [--falling-text-size:1.3rem] md:[--falling-text-size:1.4rem] xl:[--falling-text-size:1.5rem]">
-      <h3 className="shrink-0 heading-section-sm">Interests</h3>
+    <div className="flex h-full flex-col overflow-hidden [--falling-text-size:1.3rem] md:[--falling-text-size:1.4rem] xl:[--falling-text-size:1.5rem]">
+      <InterestsHeading />
       <FallingText
         className="min-h-10 flex-1"
         text={data.skills}

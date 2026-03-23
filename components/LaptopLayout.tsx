@@ -124,11 +124,11 @@ export default function ResizableLayout({
         >
           <div
             ref={topVLineRef}
-            className={`absolute h-full origin-top bg-black ${
+            className={`absolute h-full origin-top bg-foreground ${
               resizeEnabled
                 ? isDragging === "vertical-top"
-                  ? "w-1 bg-gray-400"
-                  : "w-px group-hover:w-1 group-hover:bg-gray-400"
+                  ? "w-1 bg-muted-foreground"
+                  : "w-px group-hover:w-1 group-hover:bg-muted-foreground"
                 : "w-px"
             }`}
           />
@@ -157,11 +157,11 @@ export default function ResizableLayout({
       >
         <div
           ref={mainHLineRef}
-          className={`absolute w-full origin-left bg-black ${
+          className={`absolute w-full origin-left bg-foreground ${
             resizeEnabled
               ? isDragging === "horizontal-main"
-                ? "h-1 bg-gray-400"
-                : "h-px group-hover:h-1 group-hover:bg-gray-400"
+                ? "h-1 bg-muted-foreground"
+                : "h-px group-hover:h-1 group-hover:bg-muted-foreground"
               : "h-px"
           }`}
         />
@@ -199,11 +199,11 @@ export default function ResizableLayout({
         >
           <div
             ref={bottomVLineRef}
-            className={`absolute h-full origin-top bg-black ${
+            className={`absolute h-full origin-top bg-foreground ${
               resizeEnabled
                 ? isDragging === "vertical-bottom"
-                  ? "w-1 bg-gray-400"
-                  : "w-px group-hover:w-1 group-hover:bg-gray-400"
+                  ? "w-1 bg-muted-foreground"
+                  : "w-px group-hover:w-1 group-hover:bg-muted-foreground"
                 : "w-px"
             }`}
           />
@@ -242,11 +242,11 @@ export default function ResizableLayout({
           >
             <div
               ref={bottomRightHLineRef}
-              className={`absolute w-full origin-left bg-black ${
+              className={`absolute w-full origin-left bg-foreground ${
                 resizeEnabled
                   ? isDragging === "horizontal-bottom-right"
-                    ? "h-1 bg-gray-400"
-                    : "h-px group-hover:h-1 group-hover:bg-gray-400"
+                    ? "h-1 bg-muted-foreground"
+                    : "h-px group-hover:h-1 group-hover:bg-muted-foreground"
                   : "h-px"
               }`}
             />

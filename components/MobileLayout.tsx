@@ -68,25 +68,25 @@ export default function MobileLayout({
         }}
       >
         {/* Hero Section */}
-        <div className="overflow-hidden border-b border-black px-6 py-6">
+        <div className="overflow-hidden border-b border-border px-6 py-6">
           <HeroSection data={siteData.hero} />
         </div>
 
         {/* Skills Section */}
-        <div className="overflow-hidden border-b border-black px-6 py-6">
+        <div className="overflow-hidden border-b border-border px-6 py-6">
           <SkillsSection data={siteData.skills} />
         </div>
 
         {/* Work Section */}
         <div
           ref={workRef}
-          className="flex items-center justify-between overflow-hidden border-b border-black bg-white px-6 py-2"
+          className="flex items-center justify-between overflow-hidden border-b border-border bg-background px-6 py-2"
         >
           <h3 className="heading-section-sm">Work</h3>
           <button
             type="button"
             onClick={handleWorkExpand}
-            className="text-black transition-opacity hover:opacity-70"
+            className="text-foreground transition-opacity hover:opacity-70"
             aria-label="Expand work section"
           >
             <FullscreenExpandIcon className="h-5 w-5" />
@@ -96,7 +96,7 @@ export default function MobileLayout({
         {/* About Section */}
         <div
           ref={aboutRef}
-          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-black bg-white px-6 transition-colors duration-200 hover:bg-gray-50"
+          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-border bg-background px-6 transition-colors duration-200 hover:bg-muted"
         >
           <SectionHeading_Clickable onClick={handleAboutExpand}>
             About Me
@@ -107,7 +107,7 @@ export default function MobileLayout({
         </div>
 
         {/* Contact Section */}
-        <div className="overflow-hidden bg-white px-6 py-6">
+        <div className="overflow-hidden bg-background px-6 py-6">
           <ContactSection
             data={siteData.contact}
             socialLinks={siteData.about.socialLinks}

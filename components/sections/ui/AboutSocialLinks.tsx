@@ -78,7 +78,7 @@ export function AboutSocialLinks({ links, className = "" }: AboutSocialLinksProp
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          className="text-black transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          className="text-foreground transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           <Icon
             className={
