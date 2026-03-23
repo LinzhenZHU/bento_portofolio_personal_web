@@ -11,12 +11,12 @@ export function ThemeTriangleDecor() {
     <div className="relative z-[101] inline-flex h-9 shrink-0 translate-x-9 items-end justify-end">
       {/* Road baseline */}
       <div
-        className="pointer-events-none absolute -bottom-1 -left-4 -right-4 h-px bg-foreground/35 [-webkit-mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)]"
+        className="pointer-events-none absolute -bottom-2 -left-4 -right-4 h-px bg-foreground/35 [-webkit-mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)]"
         aria-hidden
       />
       {/* Moving lane dashes (left -> right) */}
       <div
-        className="animate-theme-road-lane motion-reduce:animate-none pointer-events-none absolute -bottom-1 -left-4 -right-4 h-px opacity-80 blur-[0.3px] [background-image:repeating-linear-gradient(90deg,currentColor_0,currentColor_12px,transparent_12px,transparent_32px)] text-foreground [-webkit-mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)]"
+        className="animate-theme-road-lane motion-reduce:animate-none pointer-events-none absolute -bottom-2 -left-4 -right-4 h-px opacity-80 blur-[0.3px] [background-image:repeating-linear-gradient(90deg,currentColor_0,currentColor_12px,transparent_12px,transparent_32px)] text-foreground [-webkit-mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)]"
         aria-hidden
       />
       <TriangleSvg
