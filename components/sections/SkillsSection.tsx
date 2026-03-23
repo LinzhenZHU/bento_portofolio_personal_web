@@ -8,7 +8,10 @@ type SkillsSectionProps = {
 
 export function SkillsSection({ data }: SkillsSectionProps) {
   return (
-    <div className="flex h-full flex-col overflow-hidden [--falling-text-size:1.3rem] md:[--falling-text-size:1.4rem] xl:[--falling-text-size:1.5rem]">
+    <div
+      data-skills-panel
+      className="flex h-full flex-col overflow-hidden [--falling-text-size:1.3rem] md:[--falling-text-size:1.4rem] xl:[--falling-text-size:1.5rem]"
+    >
       <InterestsHeading />
       <FallingText
         className="min-h-10 flex-1"
