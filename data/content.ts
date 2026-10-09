@@ -169,7 +169,7 @@ export const projectCategories: ProjectCategory[] = [
   },
   {
     workTab: "honorAward",
-    category: "Recognition",
+    category: "Fellowships & Scholarships",
     projects: [
       {
         title: "Wang Kuo Tong Memorial Fellowship",
@@ -177,8 +177,39 @@ export const projectCategories: ProjectCategory[] = [
         techStack: ["Fellowship"],
       },
       {
+        title: "President’s Scholarship",
+        description: "University of Nottingham Ningbo China",
+        techStack: ["Scholarship"],
+      },
+      {
+        title: "Dream Scholarship: Science & Technology",
+        description: "University of Nottingham Ningbo China",
+        techStack: ["Scholarship"],
+      },
+      {
+        title: "Li DakSum Innovation Fellowship",
+        description: "University of Nottingham Ningbo China",
+        techStack: ["Innovation fellowship"],
+      },
+    ],
+  },
+  {
+    workTab: "honorAward",
+    category: "Academic Honors",
+    projects: [
+      {
         title: "Provincial Outstanding Graduate",
         description: "Zhejiang, China",
+        techStack: ["Graduate honor"],
+      },
+      {
+        title: "Best Performer of the Year",
+        description: "University of Nottingham Ningbo China",
+        techStack: ["Academic honor"],
+      },
+      {
+        title: "Outstanding Student",
+        description: "University of Nottingham Ningbo China",
         techStack: ["Academic honor"],
       },
     ],
