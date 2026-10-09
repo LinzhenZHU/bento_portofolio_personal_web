@@ -34,9 +34,11 @@ export function AboutSection({
             <SectionHeading_Clickable onClick={onExpand}>
               {`About Me`}
             </SectionHeading_Clickable>
-            <p className="max-w-[65ch] whitespace-pre-line text-base leading-relaxed text-foreground md:text-lg">
-              {data.text}
-            </p>
+            <div className="about-copy max-w-[65ch] text-foreground">
+              {data.text.split(/\n\s*\n/).map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -44,14 +46,19 @@ export function AboutSection({
   }
 
   return (
-    <div className="h-full">
-      <div className="flex items-center justify-between">
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="flex shrink-0 items-center justify-between">
         <SectionHeading_Clickable onClick={onExpand}>
           {`About Me`}
         </SectionHeading_Clickable>
       </div>
 
-      <div className="mt-3 flow-root sm:mt-4">
+      <div
+        className="panel-scroll about-copy mt-4 min-h-0 flex-1 text-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+        tabIndex={0}
+        role="region"
+        aria-label="Research background"
+      >
         <div className="relative float-left mb-2 mr-4 hidden h-24 w-24 sm:block lg:hidden xl:mr-5 xl:block">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -60,17 +67,15 @@ export function AboutSection({
             className="h-full w-full object-contain"
           />
         </div>
-        <div>
-          <p className="max-w-[65ch] text-base leading-6 text-foreground 2xl:text-[17px] 2xl:leading-relaxed">
-            {data.text.split(/\n\s*\n/).slice(0, 2).join(" ")}
-          </p>
-          {onExpand && (
-            <button type="button" onClick={onExpand} className="mt-2 min-h-11 rounded-sm text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
-              Full bio &amp; education <span aria-hidden="true">↗</span>
-            </button>
-          )}
-        </div>
+        {data.text.split(/\n\s*\n/).slice(0, 3).map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
       </div>
+      {onExpand && (
+        <button type="button" onClick={onExpand} className="mt-3 min-h-11 shrink-0 self-start rounded-sm text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+          Full bio &amp; education <span aria-hidden="true">↗</span>
+        </button>
+      )}
     </div>
   );
 }

@@ -29,7 +29,9 @@ export const skillsData: SkillsData = {
 export const aboutData: AboutData = {
   image: "/pic.png",
   imageAlt: "Illustration of Linzhen Zhu",
-  text: `I am a Ph.D. Candidate in Computer Science and Engineering at the University of Michigan, Ann Arbor, advised by Prof. Ke Sun in the Ambient Intelligence (AmI) Lab. My research spans optical and tactile sensing, mobile and ubiquitous computing, and human–computer interaction.
+  text: `I am a Ph.D. Candidate in Computer Science and Engineering at the University of Michigan, Ann Arbor, advised by Prof. Ke Sun in the Ambient Intelligence (AmI) Lab.
+
+My research spans optical and tactile sensing, mobile and ubiquitous computing, and human–computer interaction.
 
 I design sensing and sensor–actuator systems that combine physical principles, embedded hardware, and computational methods to understand and interact with the physical world.
 

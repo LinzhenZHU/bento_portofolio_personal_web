@@ -190,7 +190,6 @@ export default function ResizableLayout({
           <div
             ref={aboutPanelRef}
             className="panel-scroll absolute left-0 right-0 top-0 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
-            tabIndex={0}
             role="region"
             aria-label="About me"
             style={{ height: "calc(100% - var(--contact-height))" }}
