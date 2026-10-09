@@ -171,6 +171,54 @@
   }
 }
 
+/* Fade from the first paint without moving full-height content into overflow. */
+@layer utilities {
+  .panel-scroll {
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .panel-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes panel-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes divider-reveal-x {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes divider-reveal-y {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  .entry-content {
+    animation: panel-fade-in 420ms ease-out both;
+  }
+
+  .entry-line-x {
+    animation: divider-reveal-x 480ms ease-out both;
+  }
+
+  .entry-line-y {
+    animation: divider-reveal-y 480ms ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .entry-content,
+    .entry-line-x,
+    .entry-line-y {
+      animation: none;
+    }
+  }
+}
+
 /* Clouds cross within the clipped appearance controls. */
 @layer utilities {
   @keyframes theme-cloud-cross {

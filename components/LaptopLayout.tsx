@@ -10,7 +10,7 @@ import {
   ContactSection,
   getClipFrom,
 } from "./sections";
-import { useResizablePanels, useEntryAnimation } from "./hooks";
+import { useResizablePanels } from "./hooks";
 import ExpandedOverlay from "./sections/ui/ExpandedOverlay";
 
 type ResizableLayoutProps = {
@@ -57,39 +57,9 @@ export default function ResizableLayout({
 
   const clipFrom = getClipFrom(sourceRect);
 
-  // Use custom hooks for animation logic
+  // Keep panel dimensions and the optional resize controls together.
   const { sizes, isDragging, handleMouseDown, resizeEnabled } =
     useResizablePanels(containerRef, { enabled: false });
-
-  // Animation refs for lines
-  const mainHLineRef = useRef<HTMLDivElement>(null);
-  const topVLineRef = useRef<HTMLDivElement>(null);
-  const bottomVLineRef = useRef<HTMLDivElement>(null);
-  const bottomRightHLineRef = useRef<HTMLDivElement>(null);
-
-  // Animation refs for content
-  const heroContentRef = useRef<HTMLDivElement>(null);
-  const skillsContentRef = useRef<HTMLDivElement>(null);
-  const workContentRef = useRef<HTMLDivElement>(null);
-  const aboutContentRef = useRef<HTMLDivElement>(null);
-  const contactContentRef = useRef<HTMLDivElement>(null);
-
-  // Entry animation
-  useEntryAnimation({
-    lines: {
-      mainHLine: mainHLineRef,
-      topVLine: topVLineRef,
-      bottomVLine: bottomVLineRef,
-      bottomRightHLine: bottomRightHLineRef,
-    },
-    content: {
-      hero: heroContentRef,
-      skills: skillsContentRef,
-      work: workContentRef,
-      about: aboutContentRef,
-      contact: contactContentRef,
-    },
-  });
 
   const bottomHeight = 100 - sizes.topHeight;
 
@@ -105,10 +75,10 @@ export default function ResizableLayout({
       >
         {/* Hero Section */}
         <div
-          className="relative h-full overflow-auto"
+          className="panel-scroll relative h-full"
           style={{ width: `${sizes.topLeftWidth}%` }}
         >
-          <div ref={heroContentRef} className="h-full p-4">
+          <div className="entry-content h-full p-4">
             <HeroSection data={siteData.hero} />
           </div>
         </div>
@@ -123,8 +93,7 @@ export default function ResizableLayout({
           }
         >
           <div
-            ref={topVLineRef}
-            className={`absolute h-full origin-top bg-foreground ${
+            className={`entry-line-y absolute h-full origin-top bg-foreground ${
               resizeEnabled
                 ? isDragging === "vertical-top"
                   ? "w-1 bg-muted-foreground"
@@ -136,10 +105,10 @@ export default function ResizableLayout({
 
         {/* Skills Section */}
         <div
-          className="relative h-full overflow-auto"
+          className="panel-scroll relative h-full"
           style={{ width: `${100 - sizes.topLeftWidth}%` }}
         >
-          <div ref={skillsContentRef} className="h-full p-4">
+          <div className="entry-content h-full p-4">
             <SkillsSection data={siteData.skills} />
           </div>
         </div>
@@ -156,8 +125,7 @@ export default function ResizableLayout({
         }
       >
         <div
-          ref={mainHLineRef}
-          className={`absolute w-full origin-left bg-foreground ${
+          className={`entry-line-x absolute w-full origin-left bg-foreground ${
             resizeEnabled
               ? isDragging === "horizontal-main"
                 ? "h-1 bg-muted-foreground"
@@ -175,10 +143,13 @@ export default function ResizableLayout({
         {/* Work Section (Left) */}
         <div
           ref={workPanelRef}
-          className="relative h-full overflow-auto"
+          className="panel-scroll relative h-full focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+          tabIndex={0}
+          role="region"
+          aria-label="Research and work"
           style={{ width: `${sizes.bottomLeftWidth}%` }}
         >
-          <div ref={workContentRef} className="min-h-full px-4 pb-4">
+          <div className="entry-content min-h-full px-4 pb-4">
             <WorkSection
               data={siteData.projectCategories}
               activeTab={workActiveTab}
@@ -198,8 +169,7 @@ export default function ResizableLayout({
           }
         >
           <div
-            ref={bottomVLineRef}
-            className={`absolute h-full origin-top bg-foreground ${
+            className={`entry-line-y absolute h-full origin-top bg-foreground ${
               resizeEnabled
                 ? isDragging === "vertical-bottom"
                   ? "w-1 bg-muted-foreground"
@@ -217,10 +187,13 @@ export default function ResizableLayout({
           {/* About Section */}
           <div
             ref={aboutPanelRef}
-            className="absolute left-0 right-0 top-0 overflow-auto"
+            className="panel-scroll absolute left-0 right-0 top-0 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+            tabIndex={0}
+            role="region"
+            aria-label="About me"
             style={{ height: `${sizes.bottomRightTopHeight}%` }}
           >
-            <div ref={aboutContentRef} className="h-full p-4">
+            <div className="entry-content h-full p-4">
               <AboutSection
                 data={siteData.about}
                 onExpand={handleAboutExpand}
@@ -241,8 +214,7 @@ export default function ResizableLayout({
             }
           >
             <div
-              ref={bottomRightHLineRef}
-              className={`absolute w-full origin-left bg-foreground ${
+              className={`entry-line-x absolute w-full origin-left bg-foreground ${
                 resizeEnabled
                   ? isDragging === "horizontal-bottom-right"
                     ? "h-1 bg-muted-foreground"
@@ -254,10 +226,10 @@ export default function ResizableLayout({
 
           {/* Contact Section */}
           <div
-            className="absolute bottom-0 left-0 right-0 overflow-auto"
+            className="panel-scroll absolute bottom-0 left-0 right-0"
             style={{ height: `${100 - sizes.bottomRightTopHeight}%` }}
           >
-            <div ref={contactContentRef} className="h-full p-4">
+            <div className="entry-content h-full p-4">
               <ContactSection
                 data={siteData.contact}
                 socialLinks={siteData.about.socialLinks}

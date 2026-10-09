@@ -30,7 +30,7 @@ export default function ExpandedOverlay({
           transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
         >
           <motion.div
-            className={`h-full overflow-auto ${padding}`}
+            className={`panel-scroll h-full ${padding}`}
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
