@@ -21,7 +21,7 @@ export const heroData: HeroData = {
 
 // ─── Skills ──────────────────────────────────────────────────
 export const skillsData: SkillsData = {
-  skills: "Robotics, Sensing, AI/ML, Camping, Photography, Electronics, Electric Vehicles, Driving (Prefer FSD 😂)",
+  skills: "Robotics, Sensing, AI/ML, Camping, Photography, Electronics, Electric Vehicles, Roadtrip (Prefer FSD 😂)",
   highlights: ["Robotics", "Sensing", "AI/ML"],
 };
 
