@@ -61,7 +61,9 @@ export function AboutSection({
           />
         </div>
         <div>
-          <p className="max-w-[65ch] text-base leading-relaxed text-foreground xl:text-[17px]">{data.text.split(/\n\s*\n/)[0]}</p>
+          <p className="max-w-[65ch] text-base leading-6 text-foreground 2xl:text-[17px] 2xl:leading-relaxed">
+            {data.text.split(/\n\s*\n/).slice(0, 2).join(" ")}
+          </p>
           {onExpand && (
             <button type="button" onClick={onExpand} className="mt-2 min-h-11 rounded-sm text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
               Full bio &amp; education <span aria-hidden="true">↗</span>
