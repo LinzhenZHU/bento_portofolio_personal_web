@@ -53,16 +53,16 @@ export function ThemeToggle() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <header className="relative h-16 overflow-hidden" aria-label="Appearance">
+    <div className="relative h-12 w-36 shrink-0 overflow-hidden [--theme-cloud-travel:9rem] sm:w-44 sm:[--theme-cloud-travel:11rem]" aria-label="Appearance">
       <ThemeCloudDrift />
-      <div className="pointer-events-none absolute right-16 top-3 flex h-8 w-32 items-end sm:w-40" aria-hidden="true">
+      <div className="pointer-events-none absolute right-12 top-1 flex h-7 w-20 items-end sm:w-24" aria-hidden="true">
         <ThemeTriangleDecor />
       </div>
       <button
         type="button"
         onClick={() => setTheme(isDark ? "light" : "dark")}
         disabled={!mounted}
-        className="absolute right-3 top-2 flex h-11 w-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        className="absolute right-0 top-0 flex h-11 w-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         aria-label={!mounted ? "Change color theme" : isDark ? "Switch to light mode" : "Switch to dark mode"}
       >
         {mounted && (isDark ? (
@@ -71,6 +71,6 @@ export function ThemeToggle() {
           <MoonIcon className="h-5 w-5" />
         ))}
       </button>
-    </header>
+    </div>
   );
 }

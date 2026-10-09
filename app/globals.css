@@ -50,8 +50,6 @@
 }
 
 :root {
-  /* Decorative clouds stay inside the dedicated appearance header. */
-  --theme-cloud-travel: 100vw;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -173,7 +171,7 @@
   }
 }
 
-/* Header clouds cross within their clipped decorative band. */
+/* Clouds cross within the clipped appearance controls. */
 @layer utilities {
   @keyframes theme-cloud-cross {
     from {

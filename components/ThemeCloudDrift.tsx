@@ -3,7 +3,7 @@
 import { Cloud, CloudFog } from "lucide-react";
 
 /**
- * Decorative clouds are clipped to the appearance header, away from page content.
+ * Decorative clouds stay inside the appearance controls beside Interests.
  */
 export function ThemeCloudDrift() {
   return (

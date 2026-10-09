@@ -96,7 +96,7 @@ export default function ResizableLayout({
   return (
     <div
       ref={containerRef}
-      className="relative h-[calc(100dvh-4rem)] min-h-[736px] w-full overflow-hidden"
+      className="relative h-dvh min-h-[736px] w-full overflow-hidden"
     >
       {/* ===== TOP SECTION (Hero | Skills) ===== */}
       <div

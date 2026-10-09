@@ -8,11 +8,15 @@ import {
   WorkSection,
   AboutSection,
   ContactSection,
-  SectionHeading_Clickable,
   getClipFrom,
 } from "./sections";
 import ExpandedOverlay from "./sections/ui/ExpandedOverlay";
-import { FullscreenExpandIcon } from "./sections/ui/FullscreenExpandIcon";
+
+const workLinks: { id: WorkTabId; label: string }[] = [
+  { id: "publication", label: "Publications" },
+  { id: "honorAward", label: "Honors & Awards" },
+  { id: "service", label: "Service" },
+];
 
 type MobileLayoutProps = {
   siteData: SiteData;
@@ -59,55 +63,48 @@ export default function MobileLayout({
 
   return (
     <div ref={containerRef} className="relative">
-      {/* Mobile column layout */}
-      <div
-        className="grid min-h-[calc(100dvh-4rem)]"
-        style={{
-          gridTemplateRows:
-            "minmax(240px, 1.2fr) minmax(220px, 1fr) auto auto auto",
-        }}
-      >
+      {/* Content determines the height; spare viewport space stays below it. */}
+      <div className="min-h-dvh">
         {/* Hero Section */}
-        <div className="border-b border-border px-6 py-6">
+        <div className="border-b border-border px-6 py-8 sm:px-8 sm:py-10">
           <HeroSection data={siteData.hero} />
         </div>
 
-        {/* Skills Section */}
-        <div className="overflow-hidden border-b border-border px-6 py-6">
-          <SkillsSection data={siteData.skills} />
+        {/* Keep the research introduction readable without opening a dialog. */}
+        <div ref={aboutRef} className="border-b border-border px-6 py-6 sm:px-8">
+          <AboutSection data={siteData.about} onExpand={handleAboutExpand} />
         </div>
 
         {/* Work Section */}
         <div
           ref={workRef}
-          className="flex items-center justify-between border-b border-border bg-background px-6 py-3"
+          className="border-b border-border bg-background px-6 py-6 sm:px-8"
         >
           <h3 className="heading-section-sm">Research & Work</h3>
-          <button
-            type="button"
-            onClick={handleWorkExpand}
-            className="flex h-11 w-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            aria-label="Expand work section"
-          >
-            <FullscreenExpandIcon className="h-5 w-5" />
-          </button>
+          <nav aria-label="Explore research" className="mt-3 flex flex-wrap gap-2">
+            {workLinks.map(({ id, label }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => {
+                  setWorkActiveTab(id);
+                  handleWorkExpand();
+                }}
+                className="min-h-11 rounded-lg border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                {label} <span aria-hidden="true">↗</span>
+              </button>
+            ))}
+          </nav>
         </div>
 
-        {/* About Section */}
-        <div
-          ref={aboutRef}
-          className="flex items-center justify-between border-b border-border bg-background px-6 py-3"
-        >
-          <SectionHeading_Clickable onClick={handleAboutExpand}>
-            About Me
-          </SectionHeading_Clickable>
-          <button type="button" onClick={handleAboutExpand} aria-label="Expand about section" className="flex h-11 w-11 items-center justify-center rounded-full text-xl hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
-            +
-          </button>
+        {/* Interests and the bounded appearance controls */}
+        <div className="overflow-hidden border-b border-border px-6 py-5 sm:px-8">
+          <SkillsSection data={siteData.skills} />
         </div>
 
         {/* Contact Section */}
-        <div className="bg-background px-6 py-6">
+        <div className="bg-background px-6 py-6 sm:px-8">
           <ContactSection
             data={siteData.contact}
             socialLinks={siteData.about.socialLinks}

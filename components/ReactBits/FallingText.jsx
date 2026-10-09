@@ -34,7 +34,8 @@ const FallingText = ({
   const textRef = useRef(null);
   const canvasContainerRef = useRef(null);
 
-  const [effectStarted, setEffectStarted] = useState(false);
+  const [effectTriggered, setEffectTriggered] = useState(false);
+  const effectStarted = trigger === "auto" || effectTriggered;
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -49,15 +50,11 @@ const FallingText = ({
   }, [text, highlightWords, highlightClass]);
 
   useEffect(() => {
-    if (trigger === "auto") {
-      setEffectStarted(true);
-      return;
-    }
     if (trigger === "scroll" && containerRef.current) {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setEffectStarted(true);
+            setEffectTriggered(true);
             observer.disconnect();
           }
         },
@@ -74,7 +71,9 @@ const FallingText = ({
     const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } =
       Matter;
 
-    const containerRect = containerRef.current.getBoundingClientRect();
+    const container = containerRef.current;
+    const canvasContainer = canvasContainerRef.current;
+    const containerRect = container.getBoundingClientRect();
     const width = containerRect.width;
     const height = containerRect.height;
 
@@ -82,11 +81,15 @@ const FallingText = ({
       return;
     }
 
+    // Keep the natural text height when the animated words leave normal flow.
+    const originalMinHeight = container.style.minHeight;
+    container.style.minHeight = `${height}px`;
+
     const engine = Engine.create();
     engine.world.gravity.y = gravity;
 
     const render = Render.create({
-      element: canvasContainerRef.current,
+      element: canvasContainer,
       engine,
       options: {
         width,
@@ -181,6 +184,7 @@ const FallingText = ({
     Runner.run(runner, engine);
     Render.run(render);
 
+    let animationFrame;
     const updateLoop = () => {
       wordBodies.forEach(({ body, elem }) => {
         const { x, y } = body.position;
@@ -188,20 +192,20 @@ const FallingText = ({
         elem.style.top = `${y}px`;
         elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
       });
-      Matter.Engine.update(engine);
-      requestAnimationFrame(updateLoop);
+      animationFrame = requestAnimationFrame(updateLoop);
     };
     updateLoop();
 
     return () => {
+      cancelAnimationFrame(animationFrame);
       Render.stop(render);
       Runner.stop(runner);
-      if (render.canvas && canvasContainerRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        canvasContainerRef.current.removeChild(render.canvas);
+      if (render.canvas?.parentNode === canvasContainer) {
+        canvasContainer.removeChild(render.canvas);
       }
       World.clear(engine.world);
       Engine.clear(engine);
+      container.style.minHeight = originalMinHeight;
     };
   }, [
     effectStarted,
@@ -213,7 +217,7 @@ const FallingText = ({
 
   const handleTrigger = () => {
     if (!effectStarted && (trigger === "click" || trigger === "hover")) {
-      setEffectStarted(true);
+      setEffectTriggered(true);
     }
   };
 

@@ -11,7 +11,7 @@ export function HeroSection({ data }: HeroSectionProps) {
       <h1 className="heading-display">{data.greeting}</h1>
       <RotatingText
         texts={data.titles}
-        mainClassName="text-2xl font-semibold leading-tight sm:text-3xl xl:text-4xl"
+        mainClassName="text-xl font-semibold leading-tight sm:text-3xl xl:text-4xl"
         staggerFrom={"random"}
         initial={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
         animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import type { SiteData, WorkTabId } from "@/data/types";
 import LaptopLayout from "../components/LaptopLayout";
 import MobileLayout from "../components/MobileLayout";
-import { ThemeToggle } from "../components/theme-toggle";
 
 type ExpandedSection = "work" | "about" | null;
 
@@ -28,9 +27,8 @@ export default function ClientPage({ siteData }: { siteData: SiteData }) {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      <ThemeToggle />
       {/* Mobile Layout */}
-      <div className="block md:hidden">
+      <div className="block lg:hidden">
         <MobileLayout
           siteData={siteData}
           expandedSection={expandedSection}
@@ -41,7 +39,7 @@ export default function ClientPage({ siteData }: { siteData: SiteData }) {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <LaptopLayout
           siteData={siteData}
           expandedSection={expandedSection}

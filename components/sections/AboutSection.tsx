@@ -52,7 +52,7 @@ export function AboutSection({
       </div>
 
       <div className="mt-3 flex items-start gap-3 sm:mt-4 sm:gap-4 xl:gap-6">
-        <div className="relative h-24 w-24 shrink-0 sm:h-32 sm:w-32 xl:h-40 xl:w-40">
+        <div className="relative hidden h-24 w-24 shrink-0 sm:block sm:h-32 sm:w-32 xl:h-40 xl:w-40">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={data.image}
