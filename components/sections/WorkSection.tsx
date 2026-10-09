@@ -7,8 +7,8 @@ import { FullscreenExpandIcon } from "./ui/FullscreenExpandIcon";
 import { ProjectCard } from "./ui/ProjectCard";
 
 const WORK_TABS: { id: WorkTabId; label: string }[] = [
-  { id: "publication", label: "Publication" },
-  { id: "honorAward", label: "Honor & Award" },
+  { id: "publication", label: "Publications" },
+  { id: "honorAward", label: "Honors & Awards" },
   { id: "service", label: "Service" },
 ];
 
@@ -47,8 +47,8 @@ export function WorkSection({
   );
 
   return (
-    <div className="relative h-full">
-      <div className="mb-2 flex items-end justify-between gap-2 border-b border-border pb-2">
+    <div className="relative min-h-full pb-4">
+      <div className="sticky top-0 z-10 mb-3 flex items-center justify-between gap-2 border-b border-border bg-background py-2">
         <nav
           className="flex min-w-0 flex-1 flex-wrap justify-start gap-x-3 gap-y-1 sm:gap-x-5"
           aria-label="Work sections"
@@ -59,6 +59,7 @@ export function WorkSection({
               <button
                 key={tab.id}
                 type="button"
+                aria-pressed={isActive}
                 onClick={() => setActiveTab(tab.id)}
                 className={`group relative inline-block cursor-pointer overflow-hidden py-1 transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
                   isActive ? "scale-105" : "hover:scale-105"
@@ -85,7 +86,7 @@ export function WorkSection({
             );
           })}
         </nav>
-        {onExpand && !isExpanded ? (
+        {isExpanded ? <CloseButton onClick={onExpand} className="shrink-0" /> : onExpand ? (
           <button
             type="button"
             onClick={onExpand}
@@ -98,8 +99,10 @@ export function WorkSection({
       </div>
 
       <h3 className="heading-section">{activeLabel}</h3>
+      {activeTab === "publication" && (
+        <p className="mt-2 text-meta">Published and accepted work. * Equal contribution.</p>
+      )}
 
-      {isExpanded && <CloseButton onClick={onExpand} />}
       {filteredGroups.length === 0 ? (
         <p className="mt-4 text-meta">No entries in this section yet.</p>
       ) : (
@@ -110,15 +113,12 @@ export function WorkSection({
           >
             <p className="mt-2 text-meta">{group.category}</p>
             <div
-              className={`mt-4 ${isExpanded ? "grid grid-cols-2 gap-6" : "space-y-4"}`}
+              className={`mt-4 ${isExpanded ? "grid grid-cols-1 items-start gap-5 lg:grid-cols-2" : "space-y-4"}`}
             >
               {group.projects.map((project) => (
                 <ProjectCard
                   key={`${group.category}-${project.title}`}
-                  title={project.title}
-                  image={project.image}
-                  techStack={project.techStack}
-                  href={project.href}
+                  {...project}
                 />
               ))}
             </div>

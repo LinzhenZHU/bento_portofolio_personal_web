@@ -1,7 +1,7 @@
 import { defineQuery } from 'next-sanity'
 
 export const heroQuery = defineQuery(
-  `*[_type == "hero" && _id == "hero"][0]{ greeting, titles }`,
+  `*[_type == "hero" && _id == "hero"][0]{ greeting, titles, links[]{ label, href } }`,
 )
 
 export const skillsQuery = defineQuery(
@@ -33,9 +33,12 @@ export const projectCategoriesQuery = defineQuery(
     category,
     projects[]{
       title,
+      authors,
+      description,
       "image": image.asset->url,
       techStack,
-      href
+      href,
+      links[]{ label, href }
     }
   }`,
 )

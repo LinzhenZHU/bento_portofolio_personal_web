@@ -3,6 +3,7 @@
 export type HeroData = {
   greeting: string;
   titles: string[];
+  links?: { label: string; href: string }[];
 };
 
 export type SkillsData = {
@@ -32,9 +33,12 @@ export type ContactEntry = {
 
 export type Project = {
   title: string;
-  image: string;
+  image?: string;
+  authors?: string;
+  description?: string;
   techStack: string[];
   href?: string;
+  links?: { label: string; href: string }[];
 };
 
 /** Tabs in the Work panel; each project group is tagged with one */

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { ThemeCloudDrift } from "./ThemeCloudDrift";
 import { ThemeTriangleDecor } from "./ThemeTriangleDecor";
 
@@ -45,42 +45,32 @@ function MoonIcon({ className }: { className?: string }) {
   );
 }
 
+const subscribe = () => () => {};
+
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) {
-    return (
-      <div aria-hidden>
-        <div className="fixed right-[calc(1rem+2.25rem+0.5rem)] top-4 z-[100] h-9 min-w-[5.5rem] rounded-sm bg-muted/40" />
-        <div className="fixed right-4 top-2 z-[100] h-9 w-9 rounded-sm bg-muted/40" />
-      </div>
-    );
-  }
-
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
   const isDark = resolvedTheme === "dark";
 
   return (
-    <>
+    <header className="relative h-16 overflow-hidden" aria-label="Appearance">
       <ThemeCloudDrift />
-      {/* Triangle + road: own vertical position (top-4) — does not follow button */}
-      <div className="fixed right-[calc(1rem+2.25rem+0.5rem)] top-4 z-[100] flex h-9 items-end justify-end">
+      <div className="pointer-events-none absolute right-16 top-3 flex h-8 w-32 items-end sm:w-40" aria-hidden="true">
         <ThemeTriangleDecor />
       </div>
-      {/* Button: same vertical band as clouds (top-2) */}
       <button
         type="button"
         onClick={() => setTheme(isDark ? "light" : "dark")}
-        className="fixed right-4 top-2 z-[101] flex h-9 w-9 shrink-0 items-center justify-center rounded-none border-0 bg-transparent p-0 text-foreground transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        disabled={!mounted}
+        className="absolute right-3 top-2 flex h-11 w-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        aria-label={!mounted ? "Change color theme" : isDark ? "Switch to light mode" : "Switch to dark mode"}
       >
-        {isDark ? (
+        {mounted && (isDark ? (
           <SunIcon className="h-5 w-5" />
         ) : (
           <MoonIcon className="h-5 w-5" />
-        )}
+        ))}
       </button>
-    </>
+    </header>
   );
 }

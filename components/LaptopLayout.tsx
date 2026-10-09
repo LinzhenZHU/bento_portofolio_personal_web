@@ -43,7 +43,7 @@ export default function ResizableLayout({
       if (rect) setSourceRect(rect);
       setExpandedSection("work");
     }
-  }, [expandedSection]);
+  }, [expandedSection, setExpandedSection]);
 
   const handleAboutExpand = useCallback(() => {
     if (expandedSection === "about") {
@@ -53,7 +53,7 @@ export default function ResizableLayout({
       if (rect) setSourceRect(rect);
       setExpandedSection("about");
     }
-  }, [expandedSection]);
+  }, [expandedSection, setExpandedSection]);
 
   const clipFrom = getClipFrom(sourceRect);
 
@@ -96,7 +96,7 @@ export default function ResizableLayout({
   return (
     <div
       ref={containerRef}
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-[calc(100dvh-4rem)] min-h-[736px] w-full overflow-hidden"
     >
       {/* ===== TOP SECTION (Hero | Skills) ===== */}
       <div
@@ -178,7 +178,7 @@ export default function ResizableLayout({
           className="relative h-full overflow-auto"
           style={{ width: `${sizes.bottomLeftWidth}%` }}
         >
-          <div ref={workContentRef} className="h-full p-4">
+          <div ref={workContentRef} className="min-h-full px-4 pb-4">
             <WorkSection
               data={siteData.projectCategories}
               activeTab={workActiveTab}
@@ -271,7 +271,7 @@ export default function ResizableLayout({
       <ExpandedOverlay
         isOpen={expandedSection === "work"}
         clipFrom={clipFrom}
-        padding="p-8"
+        padding="px-8 pb-8"
         uniqueKey="work-expanded"
       >
         <WorkSection
@@ -286,7 +286,7 @@ export default function ResizableLayout({
       <ExpandedOverlay
         isOpen={expandedSection === "about"}
         clipFrom={clipFrom}
-        padding="p-8"
+        padding="px-8 pb-8"
         uniqueKey="about-expanded"
       >
         <AboutSection

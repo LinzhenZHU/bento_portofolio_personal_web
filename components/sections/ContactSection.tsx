@@ -31,8 +31,8 @@ type ContactSectionProps = {
 export function ContactSection({ data, socialLinks }: ContactSectionProps) {
   return (
     <div className="h-full">
-      <h3 className="heading-section-sm">Contact Me</h3>
-      <div className="mt-4 space-y-2">
+      <h3 className="text-xl font-bold leading-tight md:text-2xl">Contact Me</h3>
+      <div className="mt-3 space-y-2">
         {data.map((entry) => (
           <a
             key={entry.value}
@@ -46,7 +46,7 @@ export function ContactSection({ data, socialLinks }: ContactSectionProps) {
           </a>
         ))}
       </div>
-      <AboutSocialLinks links={socialLinks} className="mt-6" />
+      <AboutSocialLinks links={socialLinks} className="mt-3" />
     </div>
   );
 }

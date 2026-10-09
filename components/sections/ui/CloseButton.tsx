@@ -1,12 +1,14 @@
 type CloseButtonProps = {
   onClick?: () => void;
+  className?: string;
 };
 
-export function CloseButton({ onClick }: CloseButtonProps) {
+export function CloseButton({ onClick, className = "absolute right-0 top-0" }: CloseButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="absolute right-0 top-0 rounded-full p-2 transition-all duration-300 hover:bg-foreground hover:text-background"
+      type="button"
+      className={`${className} flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-foreground hover:text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring`}
       aria-label="Close"
     >
       <svg

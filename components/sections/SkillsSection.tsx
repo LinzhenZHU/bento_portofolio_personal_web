@@ -10,7 +10,7 @@ export function SkillsSection({ data }: SkillsSectionProps) {
   return (
     <div
       data-skills-panel
-      className="flex h-full flex-col overflow-hidden [--falling-text-size:1.3rem] md:[--falling-text-size:1.4rem] xl:[--falling-text-size:1.5rem]"
+      className="flex h-full flex-col overflow-hidden [--falling-text-size:1.3rem] md:[--falling-text-size:1.1rem] xl:[--falling-text-size:1.25rem]"
     >
       <InterestsHeading />
       <FallingText

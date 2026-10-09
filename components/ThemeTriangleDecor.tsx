@@ -1,14 +1,11 @@
 "use client";
 
-import type { CSSProperties } from "react";
-
 /**
  * Wireframe triangle only (theme toggle). Clouds live in ThemeCloudDrift (full-width path).
  */
 export function ThemeTriangleDecor() {
-  const triH = "clamp(0.5rem,2vh,1.167rem)";
   return (
-    <div className="relative z-[101] inline-flex h-9 shrink-0 translate-x-9 items-end justify-end">
+    <div className="relative inline-flex h-8 w-full items-end justify-end">
       {/* Road baseline */}
       <div
         className="pointer-events-none absolute -bottom-2 -left-4 -right-4 h-px bg-foreground/35 [-webkit-mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_18%,black_82%,transparent)]"
@@ -20,8 +17,7 @@ export function ThemeTriangleDecor() {
         aria-hidden
       />
       <TriangleSvg
-        className="relative z-10 w-auto text-foreground/80"
-        style={{ height: triH }}
+        className="relative h-4 w-full text-foreground/80"
       />
     </div>
   );
@@ -29,10 +25,8 @@ export function ThemeTriangleDecor() {
 
 function TriangleSvg({
   className,
-  style,
 }: {
   className?: string;
-  style?: CSSProperties;
 }) {
   const B = 100;
   const rad15 = (15 * Math.PI) / 180;
@@ -46,7 +40,6 @@ function TriangleSvg({
   return (
     <svg
       className={className}
-      style={style}
       viewBox={`0 0 ${B} ${H}`}
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"

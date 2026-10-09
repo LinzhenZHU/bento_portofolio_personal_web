@@ -12,8 +12,8 @@ export const projectCategory = defineType({
       description: 'Which top tab this group appears under',
       options: {
         list: [
-          { title: 'Publication', value: 'publication' },
-          { title: 'Honor & Award', value: 'honorAward' },
+          { title: 'Publications', value: 'publication' },
+          { title: 'Honors & Awards', value: 'honorAward' },
           { title: 'Service', value: 'service' },
         ],
         layout: 'radio',
@@ -25,7 +25,7 @@ export const projectCategory = defineType({
       name: 'category',
       title: 'Category Name',
       type: 'string',
-      description: 'e.g. "Web Development", "Mobile Apps"',
+      description: 'e.g. "Conference Papers", "Journal Articles", "Peer Review"',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -50,24 +50,47 @@ export const projectCategory = defineType({
               validation: (rule) => rule.required(),
             }),
             defineField({
+              name: 'authors',
+              title: 'Authors',
+              type: 'string',
+              description: 'Use * to indicate equal contribution.',
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 2,
+            }),
+            defineField({
               name: 'image',
               title: 'Screenshot / Thumbnail',
               type: 'image',
               options: { hotspot: true },
-              validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'techStack',
-              title: 'Tech Stack',
+              title: 'Venue, Year, and Status',
               type: 'array',
               of: [{ type: 'string' }],
-              description: 'Technologies used (e.g. "GSAP", "Three.js")',
+              description: 'e.g. "ACM MobiCom 2026", "Accepted full paper"',
             }),
             defineField({
               name: 'href',
               title: 'Project URL',
               type: 'url',
               description: 'Link to live project (optional)',
+            }),
+            defineField({
+              name: 'links',
+              title: 'Resources',
+              type: 'array',
+              of: [{
+                type: 'object',
+                fields: [
+                  defineField({ name: 'label', title: 'Label', type: 'string', validation: (rule) => rule.required() }),
+                  defineField({ name: 'href', title: 'URL', type: 'url', validation: (rule) => rule.required() }),
+                ],
+              }],
             }),
           ],
           preview: {

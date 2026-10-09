@@ -15,7 +15,7 @@ export default function ExpandedOverlay({
   isOpen,
   clipFrom,
   children,
-  padding = "p-6",
+  padding = "px-6 pb-6",
   uniqueKey,
 }: ExpandedOverlayProps) {
   return (

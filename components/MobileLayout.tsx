@@ -58,17 +58,17 @@ export default function MobileLayout({
   const clipFrom = getClipFrom(sourceRect);
 
   return (
-    <div ref={containerRef} className="relative h-dvh overflow-hidden">
+    <div ref={containerRef} className="relative">
       {/* Mobile column layout */}
       <div
-        className="grid h-full"
+        className="grid min-h-[calc(100dvh-4rem)]"
         style={{
           gridTemplateRows:
-            "minmax(0, 2.5fr) minmax(0, 2.5fr) minmax(0, 0.7fr) minmax(0, 0.7fr) minmax(0, 1.5fr)",
+            "minmax(240px, 1.2fr) minmax(220px, 1fr) auto auto auto",
         }}
       >
         {/* Hero Section */}
-        <div className="overflow-hidden border-b border-border px-6 py-6">
+        <div className="border-b border-border px-6 py-6">
           <HeroSection data={siteData.hero} />
         </div>
 
@@ -80,13 +80,13 @@ export default function MobileLayout({
         {/* Work Section */}
         <div
           ref={workRef}
-          className="flex items-center justify-between overflow-hidden border-b border-border bg-background px-6 py-2"
+          className="flex items-center justify-between border-b border-border bg-background px-6 py-3"
         >
-          <h3 className="heading-section-sm">Work</h3>
+          <h3 className="heading-section-sm">Research & Work</h3>
           <button
             type="button"
             onClick={handleWorkExpand}
-            className="text-foreground transition-opacity hover:opacity-70"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             aria-label="Expand work section"
           >
             <FullscreenExpandIcon className="h-5 w-5" />
@@ -96,18 +96,18 @@ export default function MobileLayout({
         {/* About Section */}
         <div
           ref={aboutRef}
-          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-border bg-background px-6 transition-colors duration-200 hover:bg-muted"
+          className="flex items-center justify-between border-b border-border bg-background px-6 py-3"
         >
           <SectionHeading_Clickable onClick={handleAboutExpand}>
             About Me
           </SectionHeading_Clickable>
-          <div onClick={handleAboutExpand} className="text-xl">
+          <button type="button" onClick={handleAboutExpand} aria-label="Expand about section" className="flex h-11 w-11 items-center justify-center rounded-full text-xl hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
             +
-          </div>
+          </button>
         </div>
 
         {/* Contact Section */}
-        <div className="overflow-hidden bg-background px-6 py-6">
+        <div className="bg-background px-6 py-6">
           <ContactSection
             data={siteData.contact}
             socialLinks={siteData.about.socialLinks}

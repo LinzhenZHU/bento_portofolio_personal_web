@@ -18,7 +18,8 @@ export const metadata: Metadata = {
     default: "Linzhen Zhu",
     template: "%s · Linzhen Zhu",
   },
-  description: "Personal portfolio — Linzhen Zhu",
+  metadataBase: new URL("https://linzhenzhu.me"),
+  description: "Linzhen Zhu is a Ph.D. Candidate at the University of Michigan, researching optical and tactile sensing in the Ambient Intelligence Lab. Publications, projects, and CV.",
 };
 
 export default function RootLayout({
