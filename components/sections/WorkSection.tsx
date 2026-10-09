@@ -47,7 +47,7 @@ export function WorkSection({
   );
 
   return (
-    <div className="relative min-h-full pb-4">
+    <div className={`relative min-h-full pb-4 ${isExpanded ? "mx-auto max-w-6xl" : ""}`}>
       <div className="sticky top-0 z-10 mb-3 flex items-center justify-between gap-2 border-b border-border bg-background py-2">
         <nav
           className="flex min-w-0 flex-1 flex-wrap justify-start gap-x-3 gap-y-1 sm:gap-x-5"
@@ -61,9 +61,7 @@ export function WorkSection({
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => setActiveTab(tab.id)}
-                className={`group relative inline-block cursor-pointer overflow-hidden py-1 transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
-                  isActive ? "scale-105" : "hover:scale-105"
-                }`}
+                className="group relative inline-flex min-h-10 cursor-pointer items-center overflow-hidden rounded-sm px-2 py-1 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
                 <span
                   className={`absolute inset-0 origin-left bg-foreground transition-transform duration-300 ease-out ${
@@ -90,7 +88,7 @@ export function WorkSection({
           <button
             type="button"
             onClick={onExpand}
-            className="mb-0.5 shrink-0 text-foreground transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             aria-label="Expand to fullscreen"
           >
             <FullscreenExpandIcon className="h-5 w-5 sm:h-6 sm:w-6" />

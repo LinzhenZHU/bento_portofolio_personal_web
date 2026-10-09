@@ -61,24 +61,26 @@ export default function ResizableLayout({
   const { sizes, isDragging, handleMouseDown, resizeEnabled } =
     useResizablePanels(containerRef, { enabled: false });
 
-  const bottomHeight = 100 - sizes.topHeight;
-
   return (
     <div
       ref={containerRef}
-      className="relative h-dvh min-h-[736px] w-full overflow-hidden"
+      className="relative h-dvh min-h-[680px] w-full overflow-hidden"
+      style={{
+        "--overview-height": `clamp(188px, ${sizes.topHeight}%, 224px)`,
+        "--contact-height": `clamp(144px, ${100 - sizes.bottomRightTopHeight}%, 168px)`,
+      } as React.CSSProperties}
     >
       {/* ===== TOP SECTION (Hero | Skills) ===== */}
       <div
         className="absolute left-0 right-0 top-0 flex"
-        style={{ height: `${sizes.topHeight}%` }}
+        style={{ height: "var(--overview-height)" }}
       >
         {/* Hero Section */}
         <div
           className="panel-scroll relative h-full"
           style={{ width: `${sizes.topLeftWidth}%` }}
         >
-          <div className="entry-content h-full p-4">
+          <div className="entry-content h-full p-5 xl:p-6">
             <HeroSection data={siteData.hero} />
           </div>
         </div>
@@ -108,7 +110,7 @@ export default function ResizableLayout({
           className="panel-scroll relative h-full"
           style={{ width: `${100 - sizes.topLeftWidth}%` }}
         >
-          <div className="entry-content h-full p-4">
+          <div className="entry-content h-full p-5 xl:p-6">
             <SkillsSection data={siteData.skills} />
           </div>
         </div>
@@ -119,7 +121,7 @@ export default function ResizableLayout({
         className={`absolute left-0 right-0 z-10 flex h-0 items-center justify-center ${
           resizeEnabled ? "group cursor-row-resize" : "pointer-events-none"
         }`}
-        style={{ top: `${sizes.topHeight}%` }}
+        style={{ top: "var(--overview-height)" }}
         onMouseDown={
           resizeEnabled ? handleMouseDown("horizontal-main") : undefined
         }
@@ -138,7 +140,7 @@ export default function ResizableLayout({
       {/* ===== BOTTOM SECTION (Work | About + Contact) ===== */}
       <div
         className="absolute bottom-0 left-0 right-0 flex"
-        style={{ height: `${bottomHeight}%` }}
+        style={{ height: "calc(100% - var(--overview-height))" }}
       >
         {/* Work Section (Left) */}
         <div
@@ -149,7 +151,7 @@ export default function ResizableLayout({
           aria-label="Research and work"
           style={{ width: `${sizes.bottomLeftWidth}%` }}
         >
-          <div className="entry-content min-h-full px-4 pb-4">
+          <div className="entry-content min-h-full px-5 pb-5 xl:px-6 xl:pb-6">
             <WorkSection
               data={siteData.projectCategories}
               activeTab={workActiveTab}
@@ -191,9 +193,9 @@ export default function ResizableLayout({
             tabIndex={0}
             role="region"
             aria-label="About me"
-            style={{ height: `${sizes.bottomRightTopHeight}%` }}
+            style={{ height: "calc(100% - var(--contact-height))" }}
           >
-            <div className="entry-content h-full p-4">
+            <div className="entry-content h-full p-5 xl:p-6">
               <AboutSection
                 data={siteData.about}
                 onExpand={handleAboutExpand}
@@ -206,7 +208,7 @@ export default function ResizableLayout({
             className={`absolute left-0 right-0 z-10 flex h-0 items-center justify-center ${
               resizeEnabled ? "group cursor-row-resize" : "pointer-events-none"
             }`}
-            style={{ top: `${sizes.bottomRightTopHeight}%` }}
+            style={{ bottom: "var(--contact-height)" }}
             onMouseDown={
               resizeEnabled
                 ? handleMouseDown("horizontal-bottom-right")
@@ -227,9 +229,9 @@ export default function ResizableLayout({
           {/* Contact Section */}
           <div
             className="panel-scroll absolute bottom-0 left-0 right-0"
-            style={{ height: `${100 - sizes.bottomRightTopHeight}%` }}
+            style={{ height: "var(--contact-height)" }}
           >
-            <div className="entry-content h-full p-4">
+            <div className="entry-content h-full p-5 xl:px-6">
               <ContactSection
                 data={siteData.contact}
                 socialLinks={siteData.about.socialLinks}

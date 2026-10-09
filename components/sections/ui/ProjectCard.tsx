@@ -22,12 +22,12 @@ export function ProjectCard({
       <div className="space-y-3 p-4 sm:p-5">
         <div className="flex flex-wrap gap-x-3 gap-y-1">
           {techStack?.map((tech) => (
-            <span key={tech} className="text-xs font-medium text-muted-foreground">
+            <span key={tech} className="text-[13px] font-medium text-muted-foreground">
               {tech}
             </span>
           ))}
         </div>
-        <h4 className="text-base font-semibold leading-snug sm:text-lg">
+        <h4 className="text-[17px] font-semibold leading-snug sm:text-lg">
           {href ? (
             <a href={href} target="_blank" rel="noopener noreferrer" className="rounded-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
               {title}

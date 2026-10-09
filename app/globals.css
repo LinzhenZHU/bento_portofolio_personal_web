@@ -117,7 +117,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --skill-highlight: #a33332;
+  --skill-highlight: #e39b94;
 }
 
 @layer base {
@@ -133,17 +133,16 @@
 @layer components {
   /* Hero / display heading — largest, for the main hero area */
   .heading-display {
-    @apply text-3xl font-bold leading-tight sm:text-4xl xl:text-5xl 2xl:text-6xl;
+    @apply font-bold;
+    font-size: clamp(2rem, 3.2vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
   }
 
   /* Section heading — primary section titles (Work, About) */
-  .heading-section {
-    @apply text-3xl font-bold leading-tight xl:text-4xl 2xl:text-5xl;
-  }
-
-  /* Section heading (small base) — starts smaller, scales up (Skills, Contact, mobile headers) */
+  .heading-section,
   .heading-section-sm {
-    @apply text-2xl font-bold leading-tight md:text-3xl xl:text-3xl 2xl:text-4xl;
+    @apply text-2xl font-semibold leading-tight tracking-tight lg:text-[1.75rem];
   }
 
   /* Panel heading — generic panel / sidebar titles */

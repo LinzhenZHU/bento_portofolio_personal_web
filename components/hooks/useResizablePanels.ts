@@ -29,8 +29,8 @@ const LERP_FACTOR = 0.15;
 
 export const DEFAULT_PANEL_SIZES: PanelSizes = {
   topHeight: 25,
-  topLeftWidth: 55,
-  bottomLeftWidth: 40,
+  topLeftWidth: 45,
+  bottomLeftWidth: 60,
   bottomRightTopHeight: 75,
 };
 

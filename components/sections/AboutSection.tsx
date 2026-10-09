@@ -22,19 +22,19 @@ export function AboutSection({
 
         {/* Mobile: stacked layout / Desktop: side-by-side */}
         <div className="mx-auto flex max-w-5xl flex-col gap-6 pb-8 pt-4 md:flex-row md:items-center md:gap-10">
-          <div className="flex shrink-0 items-center justify-center md:w-1/3">
+          <div className="flex shrink-0 items-center justify-center md:w-56">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={data.image}
               alt={data.imageAlt}
-              className="h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-auto md:w-full"
+              className="h-40 w-40 object-contain sm:h-56 sm:w-56"
             />
           </div>
           <div className="min-w-0 flex-1">
             <SectionHeading_Clickable onClick={onExpand}>
               {`About Me`}
             </SectionHeading_Clickable>
-            <p className="whitespace-pre-line text-body leading-relaxed text-foreground md:text-lg md:leading-relaxed">
+            <p className="max-w-[65ch] whitespace-pre-line text-base leading-relaxed text-foreground md:text-lg">
               {data.text}
             </p>
           </div>
@@ -51,8 +51,8 @@ export function AboutSection({
         </SectionHeading_Clickable>
       </div>
 
-      <div className="mt-3 flex items-start gap-3 sm:mt-4 sm:gap-4 xl:gap-6">
-        <div className="relative hidden h-24 w-24 shrink-0 sm:block sm:h-32 sm:w-32 xl:h-40 xl:w-40">
+      <div className="mt-3 flow-root sm:mt-4">
+        <div className="relative float-left mb-2 mr-4 hidden h-24 w-24 sm:block lg:hidden xl:mr-5 xl:block">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={data.image}
@@ -60,10 +60,10 @@ export function AboutSection({
             className="h-full w-full object-contain"
           />
         </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-base leading-relaxed text-foreground lg:text-lg">{data.text.split(/\n\s*\n/)[0]}</p>
+        <div>
+          <p className="max-w-[65ch] text-base leading-relaxed text-foreground xl:text-[17px]">{data.text.split(/\n\s*\n/)[0]}</p>
           {onExpand && (
-            <button type="button" onClick={onExpand} className="mt-4 rounded-sm text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+            <button type="button" onClick={onExpand} className="mt-2 min-h-11 rounded-sm text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
               Full bio &amp; education <span aria-hidden="true">↗</span>
             </button>
           )}
